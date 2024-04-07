@@ -131,7 +131,7 @@ public class Main extends JFrame {
 
         panelCode = new JPanel();
         panelCode.setBackground(ColorManager.BACKGROUND);
-        panelCode.setBorder(new TitledBorder(null, "Code C++", TitledBorder.LEADING, TitledBorder.TOP, null, ColorManager.TEXT));
+        panelCode.setBorder(new TitledBorder(null, "Code Java", TitledBorder.LEADING, TitledBorder.TOP, null, ColorManager.TEXT));
 
         panelAlgorithm = new JPanel();
         panelAlgorithm.setBackground(ColorManager.BACKGROUND);
@@ -246,26 +246,32 @@ public class Main extends JFrame {
 
         buttonBubbleSort = new JRadioButton("Bubble Sort");
         buttonBubbleSort.setBounds(24, 44, 149, 23);
+        buttonBubbleSort.setForeground(ColorManager.TEXT);
         panelAlgorithm.add(buttonBubbleSort);
 
         buttonSelectionSort = new JRadioButton("Selection Sort");
         buttonSelectionSort.setBounds(24, 70, 149, 23);
+        buttonSelectionSort.setForeground(ColorManager.TEXT);
         panelAlgorithm.add(buttonSelectionSort);
 
         buttonInsertionSort = new JRadioButton("Insertion Sort");
         buttonInsertionSort.setBounds(24, 96, 149, 23);
+        buttonInsertionSort.setForeground(ColorManager.TEXT);
         panelAlgorithm.add(buttonInsertionSort);
 
         buttonMergeSort = new JRadioButton("Merge Sort");
         buttonMergeSort.setBounds(24, 122, 149, 23);
+        buttonMergeSort.setForeground(ColorManager.TEXT);
         panelAlgorithm.add(buttonMergeSort);
 
         buttonHeapSort = new JRadioButton("Heap Sort");
         buttonHeapSort.setBounds(24, 148, 149, 23);
+        buttonHeapSort.setForeground(ColorManager.TEXT);
         panelAlgorithm.add(buttonHeapSort);
 
         buttonQuickSort = new JRadioButton("Quick Sort");
         buttonQuickSort.setBounds(24, 174, 149, 23);
+        buttonQuickSort.setForeground(ColorManager.TEXT);
         panelAlgorithm.add(buttonQuickSort);
 
         groupSort = new ButtonGroup();
@@ -426,54 +432,52 @@ public class Main extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 model.removeAllElements();
-                addMergeSort();
+                addHeapSort();
                 listCode.setSelectedIndex(0);
             }
 
-            private void addMergeSort() {
-                model.addElement("void MergeSort(int left, int right) {");
-                model.addElement("    if (left < right) {");
-                model.addElement("        int mid = (left + right) / 2;");
-                model.addElement("        MergeSort(left, mid);");
-                model.addElement("        MergeSort(mid + 1, right);");
-                model.addElement("        Merge(left, mid, right);");
-                model.addElement("    }");
+            private void addHeapSort() {
+                model.addElement("void HeapSort(int a[],int n) {");
+                model.addElement("     int r;");
+                model.addElement("     CreateHeap(a, n);");
+                model.addElement("     r = n - 1;");
+                model.addElement("     while(r > 0) {");
+                model.addElement("          Swap(a[0], a[r]);");
+                model.addElement("          r--;");
+                model.addElement("          if(r > 0)");
+                model.addElement("               shift(a, 0, r);");
+                model.addElement("     }");
                 model.addElement("}");
                 model.addElement("");
-                model.addElement("public void Merge(int left, int mid, int right) {");
-                model.addElement("    int n1 = mid - left + 1;");
-                model.addElement("    int n2 = right - mid;");
-                model.addElement("    int[] T = new int[n1 + n2];");
-                model.addElement("    int[] L = new int[n1];");
-                model.addElement("    int[] R = new int[n2];");
-                model.addElement("    int i, j, k;");
-                model.addElement("    for (i = 0; i < n1; i++)");
-                model.addElement("        L[i] = array[left + i];");
-                model.addElement("    for (j = 0; j < n2; j++)");
-                model.addElement("        R[j] = array[mid + 1 + j];");
-                model.addElement("    i = 0; j = 0;");
-                model.addElement("    k = left;");
-                model.addElement("    while (i < n1 && j < n2) {");
-                model.addElement("        if (L[i] <= R[j]) {");
-                model.addElement("            array[k] = L[i];");
-                model.addElement("            i++;");
-                model.addElement("        } else {");
-                model.addElement("            array[k] = R[j];");
-                model.addElement("            j++;");
-                model.addElement("        }");
-                model.addElement("        k++;");
-                model.addElement("    }");
-                model.addElement("    while (i < n1) {");
-                model.addElement("        array[k] = L[i];");
-                model.addElement("        i++;");
-                model.addElement("        k++;");
-                model.addElement("    }");
-                model.addElement("    while (j < n2) {");
-                model.addElement("        array[k] = R[j];");
-                model.addElement("        j++;");
-                model.addElement("        k++;");
-                model.addElement("    }");
+                model.addElement("void CreateHeap(int a[], int n) {");
+                model.addElement("     int l;");
+                model.addElement("     l = n / 2 - 1;");
+                model.addElement("     while(l >= 0) {");
+                model.addElement("          shift(a, l, n - 1);");
+                model.addElement("          l = l - 1;");
+                model.addElement("     }");
                 model.addElement("}");
+                model.addElement("");
+                model.addElement("void shift(int a[], int l, int r) {");
+                model.addElement("     int x, i, j;");
+                model.addElement("     i = l;");
+                model.addElement("     j = 2 * i + 1;");
+                model.addElement("     x = a[i];");
+                model.addElement("     while( j <= r) {");
+                model.addElement("          if(j < r)");
+                model.addElement("          if(a[j] < a[j+1])");
+                model.addElement("          j++;");
+                model.addElement("          if(a[j] <= x)");
+                model.addElement("               return;");
+                model.addElement("          else {");
+                model.addElement("               a[i] = a[j]");
+                model.addElement("               a[j] = x;");
+                model.addElement("               i = j;");
+                model.addElement("               j = 2 * i + 1;");
+                model.addElement("               x = a[i];");
+                model.addElement("          }");
+                model.addElement("     }");
+                model.addElement("}");  	
             }
         };
 
