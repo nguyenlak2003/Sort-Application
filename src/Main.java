@@ -935,6 +935,7 @@ public class Main extends JFrame {
         {
             int value = rand.nextInt(99) + 1;
             Array[i].setText(String.valueOf(value));
+            Array[i].setBackground(ColorManager.SORT_BACKGROUND);
             Array[i].setForeground(ColorManager.CREATE_TEXT);
             array[i] = value;
         }
