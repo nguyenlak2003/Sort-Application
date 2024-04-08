@@ -1054,8 +1054,8 @@ public class Main extends JFrame {
                         threads[cur - 1].join();
                     stLabel.setOpaque(true);
                     ndLabel.setOpaque(true);
-                    stLabel.setBackground(ColorManager.BAR_GREEN);
-                    ndLabel.setBackground(ColorManager.BAR_GREEN);
+                    stLabel.setBackground(ColorManager.PROCESSING);
+                    ndLabel.setBackground(ColorManager.PROCESSING);
 
                     while(stLabel.getY() > 100)
                     {
@@ -1082,9 +1082,9 @@ public class Main extends JFrame {
                     int tmpY = stLabel.getY();
                     stLabel.setLocation(x1, ndLabel.getY());
                     ndLabel.setLocation(x2, tmpY);
-                    stLabel.setBackground(SystemColor.inactiveCaption);
+                    stLabel.setBackground(ColorManager.SORT_BACKGROUND);
                     if(pos == 0)
-                        ndLabel.setBackground(SystemColor.inactiveCaption);
+                        ndLabel.setBackground(ColorManager.SORT_BACKGROUND);
                 } catch (Exception e){}
             }
         });
