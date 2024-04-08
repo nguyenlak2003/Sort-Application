@@ -189,7 +189,7 @@ public class Main extends JFrame {
                 {
                     setState(3);
                     for(int i = 0; i < num; i++)
-                        Array[i].setForeground(Color.BLUE);
+                        Array[i].setForeground(ColorManager.BEFORE_SORT);
 
                     if(buttonBubbleSort.isSelected()){
                         BubbleSort();
@@ -245,32 +245,38 @@ public class Main extends JFrame {
         panelAlgorithm.setLayout(null);
 
         buttonBubbleSort = new JRadioButton("Bubble Sort");
+        buttonBubbleSort.setFont(new Font("Tahoma", Font.PLAIN, 15));
         buttonBubbleSort.setBounds(24, 44, 149, 23);
         buttonBubbleSort.setForeground(ColorManager.TEXT);
         panelAlgorithm.add(buttonBubbleSort);
 
         buttonSelectionSort = new JRadioButton("Selection Sort");
-        buttonSelectionSort.setBounds(24, 70, 149, 23);
+        buttonSelectionSort.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        buttonSelectionSort.setBounds(24, 75, 149, 23);
         buttonSelectionSort.setForeground(ColorManager.TEXT);
         panelAlgorithm.add(buttonSelectionSort);
 
         buttonInsertionSort = new JRadioButton("Insertion Sort");
-        buttonInsertionSort.setBounds(24, 96, 149, 23);
+        buttonInsertionSort.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        buttonInsertionSort.setBounds(24, 106, 149, 23);
         buttonInsertionSort.setForeground(ColorManager.TEXT);
         panelAlgorithm.add(buttonInsertionSort);
 
         buttonMergeSort = new JRadioButton("Merge Sort");
-        buttonMergeSort.setBounds(24, 122, 149, 23);
+        buttonMergeSort.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        buttonMergeSort.setBounds(24, 137, 149, 23);
         buttonMergeSort.setForeground(ColorManager.TEXT);
         panelAlgorithm.add(buttonMergeSort);
 
         buttonHeapSort = new JRadioButton("Heap Sort");
-        buttonHeapSort.setBounds(24, 148, 149, 23);
+        buttonHeapSort.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        buttonHeapSort.setBounds(24, 168, 149, 23);
         buttonHeapSort.setForeground(ColorManager.TEXT);
         panelAlgorithm.add(buttonHeapSort);
 
         buttonQuickSort = new JRadioButton("Quick Sort");
-        buttonQuickSort.setBounds(24, 174, 149, 23);
+        buttonQuickSort.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        buttonQuickSort.setBounds(24, 199, 149, 23);
         buttonQuickSort.setForeground(ColorManager.TEXT);
         panelAlgorithm.add(buttonQuickSort);
 
@@ -382,48 +388,41 @@ public class Main extends JFrame {
             }
 
             private void addMergeSort() {
-                model.addElement("void MergeSort(int left, int right) {");
-                model.addElement("    if (left < right) {");
-                model.addElement("        int mid = (left + right) / 2;");
-                model.addElement("        MergeSort(left, mid);");
-                model.addElement("        MergeSort(mid + 1, right);");
-                model.addElement("        Merge(left, mid, right);");
-                model.addElement("    }");
-                model.addElement("}");
-                model.addElement("");
-                model.addElement("public void Merge(int left, int mid, int right) {");
-                model.addElement("    int n1 = mid - left + 1;");
-                model.addElement("    int n2 = right - mid;");
-                model.addElement("    int[] T = new int[n1 + n2];");
-                model.addElement("    int[] L = new int[n1];");
-                model.addElement("    int[] R = new int[n2];");
-                model.addElement("    int i, j, k;");
-                model.addElement("    for (i = 0; i < n1; i++)");
-                model.addElement("        L[i] = array[left + i];");
-                model.addElement("    for (j = 0; j < n2; j++)");
-                model.addElement("        R[j] = array[mid + 1 + j];");
-                model.addElement("    i = 0; j = 0;");
-                model.addElement("    k = left;");
-                model.addElement("    while (i < n1 && j < n2) {");
-                model.addElement("        if (L[i] <= R[j]) {");
-                model.addElement("            array[k] = L[i];");
-                model.addElement("            i++;");
-                model.addElement("        } else {");
-                model.addElement("            array[k] = R[j];");
-                model.addElement("            j++;");
-                model.addElement("        }");
-                model.addElement("        k++;");
-                model.addElement("    }");
-                model.addElement("    while (i < n1) {");
-                model.addElement("        array[k] = L[i];");
-                model.addElement("        i++;");
-                model.addElement("        k++;");
-                model.addElement("    }");
-                model.addElement("    while (j < n2) {");
-                model.addElement("        array[k] = R[j];");
-                model.addElement("        j++;");
-                model.addElement("        k++;");
-                model.addElement("    }");
+               model.addElement("public static void merge(int[] arr, int low, int mid, int high) {");
+                model.addElement("     int[] left = new int[mid - low + 1];");
+                model.addElement("     int[] right = new int[high - mid];");
+                model.addElement("     for(int i = 0; i < left.length; i++);");
+                model.addElement("          left[i] = arr[low + i];");
+                model.addElement("     for(int i = 0; i < right.length; i++)");
+                model.addElement("          right[i] = arr[mid + 1 + i];");
+                model.addElement("     int i = 0, j = 0;");
+                model.addElement("     for(int k = low; k <= high; k++){");
+                model.addElement("         if(i < left.length && j < right.length){");
+                model.addElement("              if(left[i] < right[j]){");
+                model.addElement("                  arr[k] = left[i];");
+                model.addElement("                  i++;");
+                model.addElement("          } else {");
+                model.addElement("              arr[k] = right[j];");
+                model.addElement("              j++;");
+                model.addElement("          }");
+                model.addElement("          } else if(i < left.length){");
+                model.addElement("              arr[k] = left[i];");
+                model.addElement("              i++;");
+                model.addElement("              k++");
+                model.addElement("          } else{");
+                model.addElement("              arr[k] = right[j];");
+                model.addElement("              j++;");
+                model.addElement("              k++;");
+                model.addElement("          }");
+                model.addElement("      }");
+                model.addElement("      public static void sort(int[] arr, int low, int high){");
+                model.addElement("          if(low < high){");
+                model.addElement("              int mid = (low + high) / 2;");
+                model.addElement("              sort(arr, low, mid);");
+                model.addElement("              sort(arr, mid + 1, high);");
+                model.addElement("              merge(arr, low, mid, high);");
+                model.addElement("          }");
+                model.addElement("      }");
                 model.addElement("}");
             }
         };
@@ -437,47 +436,34 @@ public class Main extends JFrame {
             }
 
             private void addHeapSort() {
-                model.addElement("void HeapSort(int a[],int n) {");
-                model.addElement("     int r;");
-                model.addElement("     CreateHeap(a, n);");
-                model.addElement("     r = n - 1;");
-                model.addElement("     while(r > 0) {");
-                model.addElement("          Swap(a[0], a[r]);");
-                model.addElement("          r--;");
-                model.addElement("          if(r > 0)");
-                model.addElement("               shift(a, 0, r);");
-                model.addElement("     }");
-                model.addElement("}");
-                model.addElement("");
-                model.addElement("void CreateHeap(int a[], int n) {");
-                model.addElement("     int l;");
-                model.addElement("     l = n / 2 - 1;");
-                model.addElement("     while(l >= 0) {");
-                model.addElement("          shift(a, l, n - 1);");
-                model.addElement("          l = l - 1;");
-                model.addElement("     }");
-                model.addElement("}");
-                model.addElement("");
-                model.addElement("void shift(int a[], int l, int r) {");
-                model.addElement("     int x, i, j;");
-                model.addElement("     i = l;");
-                model.addElement("     j = 2 * i + 1;");
-                model.addElement("     x = a[i];");
-                model.addElement("     while( j <= r) {");
-                model.addElement("          if(j < r)");
-                model.addElement("          if(a[j] < a[j+1])");
-                model.addElement("          j++;");
-                model.addElement("          if(a[j] <= x)");
-                model.addElement("               return;");
-                model.addElement("          else {");
-                model.addElement("               a[i] = a[j]");
-                model.addElement("               a[j] = x;");
-                model.addElement("               i = j;");
-                model.addElement("               j = 2 * i + 1;");
-                model.addElement("               x = a[i];");
+                model.addElement("public class HeapSort{");
+                model.addElement("      public static void heapSort(int[] arr){");
+                model.addElement("          int n = arr.length;");
+                model.addElement("          for(int i = n / 2 - 1; i >= 0; i--)");
+                model.addElement("              heapify(arr, n, i);");
+                model.addElement("          for(int i = n - 1; i >= 0; i--){");
+                model.addElement("              int tmp = arr[0];");
+                model.addElement("              arr[0] = arr[i];");
+                model.addElement("              arr[i] = tmp;");
+                model.addElement("              heapify(arr, i, 0);");
                 model.addElement("          }");
-                model.addElement("     }");
-                model.addElement("}");  	
+                model.addElement("      }");
+                model.addElement("      private static void heapify(int[] arr, int n, int i){");
+                model.addElement("          int max = i;");
+                model.addElement("          int left = 2 * i + 1;");
+                model.addElement("          int right = 2 * i + 2;");
+                model.addElement("          if(left < n && arr[left] > arr[max])");
+                model.addElement("              max = left;");
+                model.addElement("          if(right < n && arr[right] > arr[max])");
+                model.addElement("              max = right;");
+                model.addElement("          if(max != i){");
+                model.addElement("              int tmp = arr[i];");
+                model.addElement("              arr[i] = arr[max];");
+                model.addElement("              arr[max] = tmp;");
+                model.addElement("              heapify(arr, n, max);");
+                model.addElement("          }");
+                model.addElement("      }");
+                model.addElement("}");
             }
         };
 
@@ -490,23 +476,30 @@ public class Main extends JFrame {
             }
 
             private void addQuickSort() {
-                model.addElement("void QuickSort(int a[], int left, int right) {");
-                model.addElement("     int i, j, x;");
-                model.addElement("     x = a[(left+right)/2];");
-                model.addElement("     i = left; j = right;");
-                model.addElement("     while(i < j) {");
-                model.addElement("          while(a[i] < x) i++;");
-                model.addElement("          while(a[j] > x) j--;");
-                model.addElement("          if(i <= j) {");
-                model.addElement("               Swap(a[i],a[j]);");
-                model.addElement("               i++ ; j--;");
+                model.addElement("public class QuickSort{");
+                model.addElement("     public static void sort(int[] arr, int d, int c){");
+                model.addElement("         if(d < c){");
+                model.addElement("              int key = arr[c];");
+                model.addElement("              int i = d;");
+                model.addElement("              int j = c - 1;");
                 model.addElement("          }");
-                model.addElement("     }");
-                model.addElement("     if(left<j)");
-                model.addElement("          QuickSort(a, left, j)");
-                model.addElement("     if(i<right)");
-                model.addElement("          QuickSort(a, i, right);");
-                model.addElement("}");
+                model.addElement("          while(i < j){");
+                model.addElement("              while(i < c && arr[i] <= key)");
+                model.addElement("                  i++;");
+                model.addElement("              while(j >= d && arr[j] > key");
+                model.addElement("                  j++;");
+                model.addElement("              if(i < j)");
+                model.addElement("                  swap(arr, i, j);");
+                model.addElement("          }");
+                model.addElement("          swap(arr, i, c);");
+                model.addElement("          sort(arr, d, i);");
+                model.addElement("          sort(arr, i + 1, c);");
+                model.addElement("      }");
+                model.addElement("      public static void swap(int[] arr, int x, int y){");
+                model.addElement("          int tmp = arr[i];");
+                model.addElement("          arr[i] = arr[j];");
+                model.addElement("          arr[j] = tmp;");
+                model.addElement("      }");
             }
         };
 
@@ -550,7 +543,7 @@ public class Main extends JFrame {
         panelArray.setLayout(GLPanelArray);
 
         randomButton = new JButton("Ngẫu nhiên");
-        randomButton.setBackground(SystemColor.activeCaption);
+        //randomButton.setBackground(SystemColor.activeCaption);
         randomButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -567,7 +560,7 @@ public class Main extends JFrame {
                 setState(3);
             }
         });
-        byHandButton.setBackground(SystemColor.activeCaption);
+        //byHandButton.setBackground(SystemColor.activeCaption);
         byHandButton.setBounds(160, 27, 120, 25);
 
         openFileButton = new JButton("Mở bằng file");
@@ -585,7 +578,7 @@ public class Main extends JFrame {
                 }
             }
         });
-        openFileButton.setBackground(SystemColor.activeCaption);
+        //openFileButton.setBackground(SystemColor.activeCaption);
         openFileButton.setBounds(15, 61, 120, 25);
 
         readFileButton = new JButton("Đọc file");
@@ -612,9 +605,9 @@ public class Main extends JFrame {
 
                         Array[i].setSize(50, 50);
                         Array[i].setOpaque(true);
-                        Array[i].setForeground(ColorManager.TEXT);
+                        Array[i].setForeground(ColorManager.CREATE_TEXT);
                         Array[i].setFont(new Font("Tahoma", Font.PLAIN, 30));
-                        Array[i].setBackground(ColorManager.BASE);
+                        Array[i].setBackground(ColorManager.SORT_BACKGROUND);
                         Array[i].setHorizontalAlignment(SwingConstants.CENTER);
                         Array[i].setVerticalAlignment(SwingConstants.CENTER);
 
@@ -636,7 +629,7 @@ public class Main extends JFrame {
                 }
             }
         });
-        readFileButton.setBackground(SystemColor.activeCaption);
+        //readFileButton.setBackground(SystemColor.activeCaption);
         readFileButton.setBounds(160, 61, 120, 25);
 
         setValueArrayPanel.setLayout(null);
@@ -661,21 +654,21 @@ public class Main extends JFrame {
         ((NumberFormatter) txt.getFormatter()).setAllowsInvalid(false);
 
         createArrayButton = new JButton("Tạo mảng");
-        createArrayButton.setBackground(SystemColor.activeCaption);
+        //createArrayButton.setBackground(SystemColor.activeCaption);
         createArrayButton.addActionListener((ActionEvent e) -> {
             createArray();
         });
         createArrayButton.setBounds(160, 59, 120, 25);
 
         deleteArrayButton = new JButton("Xóa mảng");
-        deleteArrayButton.setBackground(SystemColor.activeCaption);
+        //deleteArrayButton.setBackground(SystemColor.activeCaption);
         deleteArrayButton.addActionListener((ActionEvent e) -> {
             deleteArray();
         });
         deleteArrayButton.setBounds(160, 95, 120, 25);
 
         setZeroButton = new JButton("Khởi tạo bằng 0");
-        setZeroButton.setBackground(SystemColor.activeCaption);
+        //setZeroButton.setBackground(SystemColor.activeCaption);
         setZeroButton.addActionListener((ActionEvent e) -> {
             setZero();
         });
@@ -868,9 +861,9 @@ public class Main extends JFrame {
 
             Array[i].setSize(50, 50);
             Array[i].setOpaque(true);
-            Array[i].setForeground(ColorManager.TEXT);
+            Array[i].setForeground(ColorManager.CREATE_TEXT);
             Array[i].setFont(new Font("Tahoma", Font.PLAIN, 30));
-            Array[i].setBackground(SystemColor.inactiveCaption);
+            Array[i].setBackground(ColorManager.SORT_BACKGROUND);
             Array[i].setHorizontalAlignment(SwingConstants.CENTER);
             Array[i].setVerticalAlignment(SwingConstants.CENTER);
 
@@ -942,7 +935,7 @@ public class Main extends JFrame {
         {
             int value = rand.nextInt(99) + 1;
             Array[i].setText(String.valueOf(value));
-            Array[i].setForeground(ColorManager.TEXT);
+            Array[i].setForeground(ColorManager.CREATE_TEXT);
             array[i] = value;
         }
         initiatePanel.setVisible(true);
@@ -971,8 +964,8 @@ public class Main extends JFrame {
                        threads[cur - 1].join();
                    }
 
-                   stLabel.setBackground(ColorManager.SWAPPING);
-                   ndLabel.setBackground(ColorManager.SWAPPING);
+                   stLabel.setBackground(ColorManager.PROCESSING);
+                   ndLabel.setBackground(ColorManager.PROCESSING);
                    while(stLabel.getY() > 100)
                    {
                        stLabel.setLocation(stLabel.getX(), stLabel.getY() - 10);
@@ -1214,8 +1207,31 @@ public class Main extends JFrame {
     * Quick Sort
     */
 
+    public void Down(int l, int r)
+    {
+        int cur = ++curT;
+        threads[cur] = new Thread(new Runnable() {
+            public void run() {
+                try {
+                    if(cur != 0)
+                        threads[cur - 1].join();
+                    while(Array[l].getY() < 250)
+                    {
+                        for(int i = l; i <= r; i++)
+                        {
+                            Array[i].setLocation(Array[i].getX(), Array[i].getY() + 10);
+                        }
+                        Thread.sleep(time);
+                    }
+                } catch (Exception e) {
+                }
+            }
+        });
+        threads[cur].start();
+    }
     public void QuickSort()
     {
+        Down(0, num - 1);
         QuickSortAnimation(0, num - 1);
     }
 
@@ -1258,9 +1274,9 @@ public class Main extends JFrame {
     public void QuickSortAnimation(int l, int r)
     {
         if(l == r) return;
-        Coloring(l, r - 1, ColorManager.PROCESSING);
-        Coloring(r, ColorManager.BAR_GREEN);
-
+        PutUp(l, r, 150);
+        Coloring(r, new Color(255, 212, 139));
+        
         int i = l, j = r - 1;
 
         while(i < j)
@@ -1268,7 +1284,7 @@ public class Main extends JFrame {
             
             choicePosition(i, j, (i < r - 1 && array[i] <= array[r]), (j > 0 && array[j] > array[r]));
             if(array[i] > array[r] && array[j] <= array[r]){
-                swap(Array[i], Array[j], ColorManager.PROCESSING);
+                swap(Array[i], Array[j], ColorManager.SORT_BACKGROUND);
                 array[i] += array[j];
                 array[j] = array[i] - array[j];
                 array[i] = array[i] - array[j];
@@ -1282,14 +1298,14 @@ public class Main extends JFrame {
         }
         
         if(array[r] < array[i]){
-            swap(Array[i], Array[r], ColorManager.PROCESSING);
+            swap(Array[i], Array[r], ColorManager.SORT_BACKGROUND);
             array[i] += array[r];
             array[r] = array[i] - array[r];
             array[i] = array[i] - array[r];
         }
         
-        Coloring(l, r, ColorManager.BASE);
-        
+        Coloring(l, r, ColorManager.SORT_BACKGROUND);
+        Down(l, r);
         QuickSortAnimation(l, i);
         QuickSortAnimation(i + 1, r);
     }
@@ -1301,15 +1317,15 @@ public class Main extends JFrame {
                 try {
                     if(cur != 0)
                         threads[cur - 1].join();
-                    Array[i].setBackground(ColorManager.SWAPPING);
-                    Array[j].setBackground(ColorManager.SWAPPING);
+                    Array[i].setBackground(ColorManager.PROCESSING);
+                    Array[j].setBackground(ColorManager.PROCESSING);
                     
-                    Thread.sleep(1000);
+                    Thread.sleep(10 * time);
                     
-                    if(stNeed) Array[i].setBackground(ColorManager.PROCESSING);
-                    if(ndNeed) Array[j].setBackground(ColorManager.PROCESSING);
+                    if(stNeed) Array[i].setBackground(ColorManager.SORT_BACKGROUND);
+                    if(ndNeed) Array[j].setBackground(ColorManager.SORT_BACKGROUND);
                     
-                    //Thread.sleep(3000);
+                    Thread.sleep(10 * time);
                 } catch (Exception e) {
                 }
             }
@@ -1321,7 +1337,7 @@ public class Main extends JFrame {
     * Merge Sort
     */
     
-    public void PutUp(int left, int right) {
+    public void PutUp(int left, int right, int x) {
         int cur = ++curT;
         threads[cur] = new Thread(new Runnable() {
             @Override
@@ -1330,15 +1346,15 @@ public class Main extends JFrame {
                     if (cur != 0)
                         threads[cur - 1].join();
                     int mid = (left + right) / 2;
-                    for (int i = left; i <= right; i ++) {
+                    for (int i = left; i <= right; i++) {
                         if (i < mid + 1)
-                            Array[i].setBackground(ColorManager.BAR_GREEN);
+                            Array[i].setBackground(ColorManager.SORT_BACKGROUND);
                         else
-                            Array[i].setBackground(ColorManager.PROCESSING);
+                            Array[i].setBackground(ColorManager.SORT_BACKGROUND);
                     }
-                    while (Array[right].getY() > 50) {
+                    while (Array[right].getY() > x) {
                         for (int i = left; i <= right; i ++) {
-                            if (Array[i].getY() > 50)
+                            if (Array[i].getY() > x)
                                 Array[i].setLocation(Array[i].getX(), Array[i].getY() - 10);
                         }
                         Thread.sleep(time);
@@ -1360,7 +1376,7 @@ public class Main extends JFrame {
                         threads[cur - 1].join();
                     }
                     int x1 = label.getX();
-                    label.setBackground(ColorManager.BAR_GREEN);
+                    label.setBackground(ColorManager.SORT_BACKGROUND);
                     while (label.getY() < 100) {
                         label.setLocation(x1, label.getY() + 10);
                         Thread.sleep(time);
@@ -1385,7 +1401,7 @@ public class Main extends JFrame {
                             Thread.sleep(time);
                         }
                     }
-                    label.setBackground(SystemColor.inactiveCaption);
+                    label.setBackground(ColorManager.SORT_BACKGROUND);
                 } catch (Exception e) {
                 }
             }
@@ -1430,7 +1446,7 @@ public class Main extends JFrame {
             R[j] = array[mid + 1 + j];
         setLabelPoint(labelPoint1, left, "i = ");
         setLabelPoint(labelPoint2, mid + 1, "j = ");
-        PutUp(left, right);
+        PutUp(left, right, 50);
         
         i = 0; j = 0;
         k = left;
@@ -1512,7 +1528,7 @@ public class Main extends JFrame {
                     if(cur != 0)
                         threads[cur - 1].join();
                     
-                    label.setBackground(ColorManager.PROCESSING);
+                    label.setBackground(ColorManager.SORT_BACKGROUND);
                     int x1 = label.getX();
                     int y1 = label.getY();
                     if (x1 < x && y1 < y) {
@@ -1553,7 +1569,7 @@ public class Main extends JFrame {
                         }
                     }
                     
-                    label.setBackground(ColorManager.BASE);
+                    label.setBackground(ColorManager.SORT_BACKGROUND);
                 } catch (Exception e) {
                 }
             }
@@ -1780,7 +1796,8 @@ public class Main extends JFrame {
                     }
                     setState(4);
                     for (int i = 0; i < num; i++) {
-                        Array[i].setBackground(Color.darkGray);
+                        Array[i].setBackground(ColorManager.BEFORE_SORT);
+                        Array[i].setForeground(ColorManager.SORT_BACKGROUND);
                     }
 
                     labelPoint1.setText("");
@@ -1812,9 +1829,9 @@ public class Main extends JFrame {
 
             Array[i].setSize(50, 50);
             Array[i].setOpaque(true);
-            Array[i].setForeground(ColorManager.TEXT);
+            Array[i].setForeground(ColorManager.CREATE_TEXT);
             Array[i].setFont(new Font("Tahoma", Font.PLAIN, 30));
-            Array[i].setBackground(SystemColor.inactiveCaption);
+            Array[i].setBackground(ColorManager.SORT_BACKGROUND);
             Array[i].setHorizontalAlignment(SwingConstants.CENTER);
             Array[i].setVerticalAlignment(SwingConstants.CENTER);
 
@@ -1855,7 +1872,7 @@ public class Main extends JFrame {
     	stLabel.setOpaque(true);
     	ndLabel.setOpaque(true);
     	
-    	stLabel.setBackground(SystemColor.inactiveCaption);
-    	ndLabel.setBackground(SystemColor.inactiveCaption);
+    	stLabel.setBackground(ColorManager.SORT_BACKGROUND);
+    	ndLabel.setBackground(ColorManager.SORT_BACKGROUND);
     }
 }
