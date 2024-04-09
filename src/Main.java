@@ -74,7 +74,7 @@ public class Main extends JFrame {
     private ActionListener actionSelectionSort, actionBubbleSortSort, actionInsertionSort, actionQuickSort, actionHeapSort, actionMergeSort;
     private JButton inforButton;
     private ChangeListener actionSize, actionSpeed;
-    private int time = 50, num;
+    private int time = 50, num, pauseTime = 1000000000;
     private JLabel labelPoint1 = new JLabel();
     private JLabel labelPoint2 = new JLabel();
     private JLabel labelPointM = new JLabel();
@@ -219,8 +219,9 @@ public class Main extends JFrame {
         stopButton = new JButton("Stop");
         stopButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                deleteArray();
-                setState(0);
+                //deleteArray();
+                //setState(0);
+                delay();
             }
 
         });
@@ -1445,25 +1446,25 @@ public class Main extends JFrame {
         //highLight(18);
         for (j = 0; j < n2; j ++)
             R[j] = array[mid + 1 + j];
-        setLabelPoint(labelPoint1, left, "i = ");
-        setLabelPoint(labelPoint2, mid + 1, "j = ");
+        //setLabelPoint(labelPoint1, left, "i = ");
+        //setLabelPoint(labelPoint2, mid + 1, "j = ");
         PutUp(left, right, 50);
         
         i = 0; j = 0;
         k = left;
         while (i < n1 && j < n2) {
             //highLight(22);
-            setLabelPoint(labelPointM, k, "k = ");
+            //setLabelPoint(labelPointM, k, "k = ");
             //highLight(23);
             if (L[i] <= R[j]) {
-                setLabelPoint(labelPoint1, left + i, "i = ");
+                //setLabelPoint(labelPoint1, left + i, "i = ");
                 //highLight(24);
                 array[k] = L[i];
                 PutDown(Array[left + i], oriLocation[k], 150);
                 //highLight(25);
                 i ++;
             } else {
-                setLabelPoint(labelPoint2, mid + 1 + j, "j = ");
+                //setLabelPoint(labelPoint2, mid + 1 + j, "j = ");
                 //highLight(27);
                 array[k] = R[j];
                 PutDown(Array[mid + 1 + j], oriLocation[k], 150);
@@ -1475,8 +1476,8 @@ public class Main extends JFrame {
         }
         while (i < n1) {
             //highLight(32);
-            setLabelPoint(labelPointM, k, "k = ");
-            setLabelPoint(labelPoint1, left + i, "i = ");
+            //setLabelPoint(labelPointM, k, "k = ");
+            //setLabelPoint(labelPoint1, left + i, "i = ");
             //highLight(33);
             array[k] = L[i];
             PutDown(Array[left + i], oriLocation[k], 150);
@@ -1485,8 +1486,8 @@ public class Main extends JFrame {
         }
         while (j < n2) {
             //highLight(37);
-            setLabelPoint(labelPointM, k, "k = ");
-            setLabelPoint(labelPoint2, mid + 1 + j, "j = ");
+            //setLabelPoint(labelPointM, k, "k = ");
+            //setLabelPoint(labelPoint2, mid + 1 + j, "j = ");
             //highLight(38);
             array[k] = R[j];
             PutDown(Array[mid + 1 + j], oriLocation[k], 150);
@@ -1875,5 +1876,29 @@ public class Main extends JFrame {
     	
     	stLabel.setBackground(ColorManager.SORT_BACKGROUND);
     	ndLabel.setBackground(ColorManager.SORT_BACKGROUND);
+    }
+    
+    public void delay()
+    {
+        int cur = ++curT;
+        threads[cur] = new Thread(new Runnable() {
+            public void run() {
+                try {
+                    if(cur != 0)
+                        threads[cur].join();
+                    swap(time, pauseTime);
+                    Thread.sleep(time);
+                } catch (Exception e) {
+                }
+            }
+        });
+        threads[cur].start();
+    }
+    
+    public void swap(int x, int y)
+    {
+        int tmp = x;
+        x  = y;
+        y = tmp;
     }
 }
